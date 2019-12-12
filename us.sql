@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : us
+ Source Server         : wanide
  Source Server Type    : MySQL
  Source Server Version : 50703
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 50703
  File Encoding         : 65001
 
- Date: 02/12/2019 15:03:56
+ Date: 12/12/2019 20:25:22
 */
 
 SET NAMES utf8mb4;
@@ -65,71 +65,6 @@ INSERT INTO `borrowhistory` VALUES (2, 'wanide', '西游记', '2019-07-25 00:00:
 INSERT INTO `borrowhistory` VALUES (7, '2', '安娜卡列尼娜', '2019-08-17 00:00:00', '借出', 26);
 
 -- ----------------------------
--- Table structure for course
--- ----------------------------
-DROP TABLE IF EXISTS `course`;
-CREATE TABLE `course`  (
-  `cno` varchar(6) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `cname` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `cpno` varchar(6) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ccredit` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`cno`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of course
--- ----------------------------
-INSERT INTO `course` VALUES ('2', '数学', NULL, 2);
-INSERT INTO `course` VALUES ('3', '信息系统', '1', 4);
-INSERT INTO `course` VALUES ('4', '操作系统', '6', 3);
-INSERT INTO `course` VALUES ('5', '数据结构', '7', 4);
-INSERT INTO `course` VALUES ('6', '数据处理', NULL, 2);
-INSERT INTO `course` VALUES ('7', 'pascal语言', '6', 4);
-
--- ----------------------------
--- Table structure for sc
--- ----------------------------
-DROP TABLE IF EXISTS `sc`;
-CREATE TABLE `sc`  (
-  `sno` char(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `cno` varchar(6) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `grade` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`sno`, `cno`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of sc
--- ----------------------------
-INSERT INTO `sc` VALUES ('200215121', '1', 92);
-INSERT INTO `sc` VALUES ('200215121', '2', 85);
-INSERT INTO `sc` VALUES ('200215121', '3', 88);
-INSERT INTO `sc` VALUES ('200215122', '2', 90);
-INSERT INTO `sc` VALUES ('200215122', '3', 80);
-
--- ----------------------------
--- Table structure for student
--- ----------------------------
-DROP TABLE IF EXISTS `student`;
-CREATE TABLE `student`  (
-  `sno` char(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `sname` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ssex` char(3) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `sage` int(11) NOT NULL,
-  `sdept` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`sno`) USING BTREE,
-  UNIQUE INDEX `sname`(`sname`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of student
--- ----------------------------
-INSERT INTO `student` VALUES ('200215121', '李勇', '男', 20, 'cs');
-INSERT INTO `student` VALUES ('200215122', '刘晨', '女', 19, 'cs');
-INSERT INTO `student` VALUES ('200215123', '王敏', '女', 18, 'ma');
-INSERT INTO `student` VALUES ('200215125', '张立', '男', 19, 'is');
-INSERT INTO `student` VALUES ('200215144', '小明', '男', 20, 'is');
-
--- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -144,7 +79,6 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('2', '000000', 'kx爸爸', 0);
 INSERT INTO `user` VALUES ('Jerry', '000000', 'Jerry', 0);
 INSERT INTO `user` VALUES ('Tom', '000000', 'tom', 0);
 INSERT INTO `user` VALUES ('wanide', '000000', 'lyr', 1);
