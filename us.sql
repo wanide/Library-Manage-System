@@ -1,0 +1,152 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : us
+ Source Server Type    : MySQL
+ Source Server Version : 50703
+ Source Host           : localhost:3306
+ Source Schema         : us
+
+ Target Server Type    : MySQL
+ Target Server Version : 50703
+ File Encoding         : 65001
+
+ Date: 02/12/2019 15:03:56
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for bookmanage
+-- ----------------------------
+DROP TABLE IF EXISTS `bookmanage`;
+CREATE TABLE `bookmanage`  (
+  `BookNo` int(255) NOT NULL AUTO_INCREMENT COMMENT '图书编号',
+  `Book` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '书名',
+  `Author` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '图书作者\r\n',
+  `Lend` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '是否借出',
+  PRIMARY KEY (`BookNo`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of bookmanage
+-- ----------------------------
+INSERT INTO `bookmanage` VALUES (1, '钢铁是怎样炼成的', '奥斯特洛夫斯基', '否');
+INSERT INTO `bookmanage` VALUES (2, '西游记', '吴承恩', '是');
+INSERT INTO `bookmanage` VALUES (3, '红楼梦', '曹雪芹', '是');
+INSERT INTO `bookmanage` VALUES (4, '水浒传', '施耐庵', '否');
+INSERT INTO `bookmanage` VALUES (5, '三国演义', '罗贯中', '是');
+INSERT INTO `bookmanage` VALUES (7, '安娜卡列尼娜', '列夫托尔斯泰', '否');
+INSERT INTO `bookmanage` VALUES (8, '平凡的世界', '路遥', '是');
+INSERT INTO `bookmanage` VALUES (10, '战争与和平', '列夫托尔斯泰', '是');
+
+-- ----------------------------
+-- Table structure for borrowhistory
+-- ----------------------------
+DROP TABLE IF EXISTS `borrowhistory`;
+CREATE TABLE `borrowhistory`  (
+  `BookNo` int(255) NOT NULL COMMENT '书本编号',
+  `Borrower` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '借阅人',
+  `Book` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '书名',
+  `Date` datetime(0) NOT NULL COMMENT '借阅日期',
+  `Lend` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '借阅状态',
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '借书序列',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of borrowhistory
+-- ----------------------------
+INSERT INTO `borrowhistory` VALUES (1, '2', '钢铁是怎样炼成的', '2019-07-24 00:00:00', '借出', 22);
+INSERT INTO `borrowhistory` VALUES (2, '2', '西游记', '2019-07-24 00:00:00', '借出', 23);
+INSERT INTO `borrowhistory` VALUES (2, '2', '西游记', '2019-07-24 00:00:00', '退还', 24);
+INSERT INTO `borrowhistory` VALUES (2, 'wanide', '西游记', '2019-07-25 00:00:00', '借出', 25);
+INSERT INTO `borrowhistory` VALUES (7, '2', '安娜卡列尼娜', '2019-08-17 00:00:00', '借出', 26);
+
+-- ----------------------------
+-- Table structure for course
+-- ----------------------------
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE `course`  (
+  `cno` varchar(6) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `cname` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `cpno` varchar(6) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `ccredit` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`cno`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of course
+-- ----------------------------
+INSERT INTO `course` VALUES ('2', '数学', NULL, 2);
+INSERT INTO `course` VALUES ('3', '信息系统', '1', 4);
+INSERT INTO `course` VALUES ('4', '操作系统', '6', 3);
+INSERT INTO `course` VALUES ('5', '数据结构', '7', 4);
+INSERT INTO `course` VALUES ('6', '数据处理', NULL, 2);
+INSERT INTO `course` VALUES ('7', 'pascal语言', '6', 4);
+
+-- ----------------------------
+-- Table structure for sc
+-- ----------------------------
+DROP TABLE IF EXISTS `sc`;
+CREATE TABLE `sc`  (
+  `sno` char(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `cno` varchar(6) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `grade` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`sno`, `cno`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of sc
+-- ----------------------------
+INSERT INTO `sc` VALUES ('200215121', '1', 92);
+INSERT INTO `sc` VALUES ('200215121', '2', 85);
+INSERT INTO `sc` VALUES ('200215121', '3', 88);
+INSERT INTO `sc` VALUES ('200215122', '2', 90);
+INSERT INTO `sc` VALUES ('200215122', '3', 80);
+
+-- ----------------------------
+-- Table structure for student
+-- ----------------------------
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student`  (
+  `sno` char(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `sname` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `ssex` char(3) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `sage` int(11) NOT NULL,
+  `sdept` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`sno`) USING BTREE,
+  UNIQUE INDEX `sname`(`sname`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of student
+-- ----------------------------
+INSERT INTO `student` VALUES ('200215121', '李勇', '男', 20, 'cs');
+INSERT INTO `student` VALUES ('200215122', '刘晨', '女', 19, 'cs');
+INSERT INTO `student` VALUES ('200215123', '王敏', '女', 18, 'ma');
+INSERT INTO `student` VALUES ('200215125', '张立', '男', 19, 'is');
+INSERT INTO `student` VALUES ('200215144', '小明', '男', 20, 'is');
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user`  (
+  `username` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(13) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `admin` int(1) NOT NULL,
+  PRIMARY KEY (`username`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES ('2', '000000', 'kx爸爸', 0);
+INSERT INTO `user` VALUES ('Jerry', '000000', 'Jerry', 0);
+INSERT INTO `user` VALUES ('Tom', '000000', 'tom', 0);
+INSERT INTO `user` VALUES ('wanide', '000000', 'lyr', 1);
+
+SET FOREIGN_KEY_CHECKS = 1;
